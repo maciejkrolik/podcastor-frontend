@@ -12,13 +12,20 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #027BE3;
-$secondary : #26A69A;
-$accent    : #9C27B0;
+$primary: #0a998b;
+$secondary: #1a082e;
+$accent: #f90064;
 
-$dark      : #1D1D1D;
+$dark: #1D1D1D;
 
-$positive  : #21BA45;
-$negative  : #C10015;
-$info      : #31CCEC;
-$warning   : #F2C037;
+$positive: #21BA45;
+$negative: #C10015;
+$info: #31CCEC;
+$warning: #F2C037;
+
+// Podcastor colors
+$btn-color: #67edac;
+$btn-text-color: #5f1b9f;
+$gradient-home-top: #f90064;
+$gradient-top: #0a998b;
+$gradient-bottom: #1a082e;

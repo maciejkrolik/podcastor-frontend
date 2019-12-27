@@ -6,10 +6,9 @@
         style="width:30vw;max-width:150px;"
       >
     </p>
-    <p class="text-faded">Sorry, nothing here...<strong>(404)</strong></p>
+    <p class="podcastor-label">Sorry, nothing here...<strong>(404)</strong></p>
     <q-btn
-      color="secondary"
-      style="width:200px;"
+      class="podcastor-btn"
       to="/"
       label="Go back"
     />
@@ -17,7 +16,15 @@
 </template>
 
 <script>
-export default {
-  name: 'Error404'
-}
+  export default {
+    name: 'Error404'
+  }
 </script>
+
+<style lang="scss">
+  @import 'src/css/quasar.variables.scss';
+
+  body {
+    background-color: $gradient-top;
+  }
+</style>
