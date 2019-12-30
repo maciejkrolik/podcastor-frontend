@@ -19,7 +19,7 @@
       content-style="backgroundColor: #0f434d;"
     >
       <q-list padding>
-        <q-item to="/" exact clickable v-ripple>
+        <q-item to="/" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="home"/>
           </q-item-section>
@@ -27,7 +27,7 @@
             <q-item-label>Home</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/podcasts" exact clickable v-ripple>
+        <q-item to="/podcasts" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="music_note"/>
           </q-item-section>
@@ -35,7 +35,7 @@
             <q-item-label>Podcasts</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/discover" exact clickable v-ripple>
+        <q-item to="/discover" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="language"/>
           </q-item-section>
@@ -43,7 +43,7 @@
             <q-item-label>Discover</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/profile" clickable v-ripple>
+        <q-item to="/profile" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="people"/>
           </q-item-section>
