@@ -8,6 +8,7 @@
     </div>
     <q-btn class="podcastor-btn" label="Register" style="margin-top: 5%"/>
     <q-btn class="podcastor-btn" label="Login" style="margin-top: 1%"/>
+    <q-btn to="/podcasts" class="podcastor-btn" label="Go to podcasts" style="margin-top: 3%"/>
   </q-page>
 </template>
 

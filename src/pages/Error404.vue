@@ -22,9 +22,7 @@
 </script>
 
 <style lang="scss">
-  @import 'src/css/quasar.variables.scss';
-
-  body {
-    background-color: $gradient-top;
+  img {
+    filter: brightness(1000);
   }
 </style>

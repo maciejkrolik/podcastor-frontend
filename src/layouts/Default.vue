@@ -19,7 +19,7 @@
       content-style="backgroundColor: #0f434d;"
     >
       <q-list padding>
-        <q-item to="/home" clickable v-ripple>
+        <q-item to="/" exact clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="home"/>
           </q-item-section>
@@ -62,8 +62,6 @@
 
 <script>
   export default {
-    name: 'PodcastorLayout',
-
     data() {
       return {
         leftDrawerOpen: false
