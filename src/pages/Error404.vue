@@ -21,7 +21,7 @@
   }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   img {
     filter: brightness(1000);
   }

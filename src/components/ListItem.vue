@@ -1,8 +1,8 @@
 <template>
-  <div class="box row jus">
-    <img class="list-item-img" src="../assets/quasar-logo-full.svg" alt="Podcast logo">
+  <div class="box row">
+    <img class="list-item-img" :src="podcast.artworkUrl600" alt="Podcast logo">
     <div class="box-title">
-      {{podcast.id}} {{podcast.title}}
+      {{podcast.collectionName}}
     </div>
     <q-btn class="list-item-btn" align="end" label="Click"/>
   </div>
@@ -19,9 +19,9 @@
   @import 'src/css/quasar.variables.scss';
 
   .list-item-img {
-    max-height: 100%;
+    height: 7em;
+    width: 7em;
     padding: 0.5em;
-    height: auto;
   }
 
   .box {
@@ -30,7 +30,7 @@
     margin: 0.5em;
     background-color: $list-item-bg;
     border-radius: 10px;
-    padding: 10px;
+    padding: 0.5em;
   }
 
   .box-title {
