@@ -19,13 +19,8 @@
       content-style="backgroundColor: #0f434d;"
     >
       <q-list padding>
-        <q-item to="/" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="home"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Home</q-item-label>
-          </q-item-section>
+        <q-item>
+          Logged as {{user.name}}
         </q-item>
         <q-item to="/podcasts" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
           <q-item-section avatar>
@@ -51,6 +46,14 @@
             <q-item-label>Profile</q-item-label>
           </q-item-section>
         </q-item>
+        <q-item @click="signOut" exact clickable v-ripple>
+          <q-item-section avatar>
+            <q-icon name="exit_to_app"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Logout</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -61,10 +64,31 @@
 </template>
 
 <script>
+  import {mapGetters, mapActions} from 'vuex';
+
   export default {
     data() {
       return {
         leftDrawerOpen: false
+      }
+    },
+    computed: {
+      ...mapGetters({
+        user: 'auth/user'
+      })
+    },
+    methods: {
+      ...mapActions({
+        signOutAction: 'auth/signOut'
+      }),
+
+      signOut() {
+        this.signOutAction()
+          .then(() => {
+            this.$router.replace({
+              path: '/'
+            })
+          })
       }
     }
   }
@@ -74,6 +98,6 @@
   @import 'src/css/quasar.variables.scss';
 
   body {
-    background-image: linear-gradient($gradient-top, $gradient-bottom);
+    background-image: linear-gradient(to bottom, $gradient-top 0%, $gradient-bottom 800px);
   }
 </style>

@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '../store'
 import routes from './routes'
+
+require('../store/subscriber');
 
 Vue.use(VueRouter);
 
@@ -10,6 +12,8 @@ import NoDrawer from "../layouts/NoDrawer";
 
 Vue.component('default-layout', Default);
 Vue.component('no-drawer-layout', NoDrawer);
+
+store.dispatch('auth/attempt', localStorage.getItem('token'));
 
 /*
  * If not building with SSR mode, you can
