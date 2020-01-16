@@ -23,7 +23,6 @@ const routes = [
 
 let authMiddleware = function (to, from, next) {
   if (!store.getters['auth/authenticated']) {
-    console.log('test');
     return next({
       path: '/'
     })
