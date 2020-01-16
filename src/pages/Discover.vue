@@ -12,14 +12,14 @@
       </template>
     </q-input>
     <div class="container fit row justify-center">
-      <ListItem v-for="podcast in podcasts" :key="podcast.collectionId" v-bind:podcast="podcast"/>
+      <PodcastListItem v-for="podcast in podcasts" :key="podcast.collectionId" v-bind:podcast="podcast"/>
     </div>
   </q-page>
 </template>
 
 <script>
   import axios from 'axios';
-  import ListItem from '../components/ListItem';
+  import PodcastListItem from "../components/PodcastListItem";
 
   const URL = 'https://itunes.apple.com/search?entity=podcast&term=';
 
@@ -42,7 +42,7 @@
       }
     },
     components: {
-      ListItem
+      PodcastListItem
     }
   }
 </script>
