@@ -4,6 +4,7 @@
       Discover
     </div>
     <q-input class="discover-search"
+             color="purple-7"
              dark bottom-slots rounded label="Search" debounce="500"
              v-model="searchValue"
              @input="getPodcasts">
@@ -12,7 +13,11 @@
       </template>
     </q-input>
     <div class="container fit row justify-center">
-      <PodcastListItem v-for="podcast in podcasts" :key="podcast.collectionId" v-bind:podcast="podcast"/>
+      <q-spinner v-if="loading" color="purple-7" size="3em"/>
+      <PodcastListItem v-if="!loading"
+                       v-for="podcast in podcasts"
+                       :key="podcast.collectionId"
+                       v-bind:podcast="podcast"/>
     </div>
   </q-page>
 </template>
@@ -27,19 +32,32 @@
     data: function () {
       return {
         searchValue: '',
-        podcasts: []
+        podcasts: [],
+        loading: false,
       }
     },
     methods: {
       getPodcasts: function () {
-        axios.get(URL + this.searchValue)
+        this.loading = true;
+
+        let endpointUrl;
+        if (this.searchValue === '') endpointUrl = URL + 'podcast';
+        else endpointUrl = URL + this.searchValue;
+
+        axios.get(endpointUrl)
           .then(response => {
             this.podcasts = response.data.results;
           })
           .catch(error => {
             console.log(error);
           })
+          .finally(() => {
+            this.loading = false;
+          })
       }
+    },
+    beforeMount() {
+      this.getPodcasts();
     },
     components: {
       PodcastListItem
