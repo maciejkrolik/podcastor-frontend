@@ -46,6 +46,7 @@
         :loading="loading1"
       />
     </q-form>
+    <q-spinner v-if="form.loading" class="spinner" color="purple-7" size="3em"/>
   </q-page>
 </template>
 
@@ -58,12 +59,15 @@
         form: {
           name: '',
           email: '',
-          password: ''
+          password: '',
+          loading: false,
         }
       }
     },
     methods: {
       register() {
+        this.form.loading = true;
+
         axios.post('https://podcastor-backend.herokuapp.com/users/register', this.form)
           .then(() => {
             this.$router.replace({
@@ -95,5 +99,10 @@
 
   .q-page {
     background-image: linear-gradient($gradient-home-top, $gradient-bottom);
+  }
+
+  .spinner {
+    position: relative;
+    top: 20px;
   }
 </style>
