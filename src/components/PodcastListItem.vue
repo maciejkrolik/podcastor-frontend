@@ -1,23 +1,31 @@
 <template>
   <div class="box row no-wrap">
-    <div @click="test()" class="box-container row no-wrap">
-      <img class="list-item-img" :src="podcast.artworkUrl600" alt="Podcast logo">
+    <div @click="podcastDetailsDialog = true" class="box-container row no-wrap">
+      <q-img class="list-item-img" :src="podcast.artworkUrl600" alt="Podcast logo"/>
       <div class="box-title self-center">
         {{podcast.collectionName}}
       </div>
     </div>
     <q-btn class="list-item-btn self-center" color="green" flat rounded icon="add"/>
+    <q-dialog v-model="podcastDetailsDialog">
+      <PodcastDetails v-bind:podcast="podcast"/>
+    </q-dialog>
   </div>
 </template>
 
 <script>
+  import PodcastDetails from "./PodcastDetails";
+
   export default {
     props: ['podcast'],
     name: 'PodcastListItem',
-    methods: {
-      test() {
-        alert('test');
-      },
+    data: function () {
+      return {
+        podcastDetailsDialog: false,
+      }
+    },
+    components: {
+      PodcastDetails
     }
   }
 </script>
@@ -26,7 +34,6 @@
   @import 'src/css/quasar.variables.scss';
 
   .list-item-img {
-    height: 7em;
     width: 7em;
     padding: 0.5em;
   }

@@ -102,7 +102,11 @@
 <style lang="scss">
   @import 'src/css/quasar.variables.scss';
 
-  body {
+  .q-header {
+    background-color: transparent;
+  }
+
+  .q-layout {
     background-image: linear-gradient(to bottom, $gradient-top 0%, $gradient-bottom 800px);
   }
 
