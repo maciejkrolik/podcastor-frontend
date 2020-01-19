@@ -11,8 +11,7 @@
         v-model="form.name"
         label="Name"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please type name']"
-        
+        :rules="[ val => val && val.length > 0 || 'Please type name']"        
       />
 
       <q-input
