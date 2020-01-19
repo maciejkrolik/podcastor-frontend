@@ -10,6 +10,7 @@
           icon="menu"
           aria-label="Menu"
         />
+        <q-toolbar-title class="podcastor-label">{{title}}</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -70,13 +71,16 @@
   export default {
     data() {
       return {
-        leftDrawerOpen: false
+        leftDrawerOpen: false,
       }
     },
     computed: {
       ...mapGetters({
         user: 'auth/user'
-      })
+      }),
+      title() {
+        return this.$route.meta.title;
+      },
     },
     methods: {
       ...mapActions({

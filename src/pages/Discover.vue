@@ -1,8 +1,5 @@
 <template>
   <q-page>
-    <div class="podcastor-label" style="text-align: center;">
-      Discover
-    </div>
     <q-input class="discover-search"
              color="purple-7"
              dark bottom-slots rounded label="Search" debounce="500"
