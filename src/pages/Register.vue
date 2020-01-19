@@ -1,11 +1,11 @@
 <template>
-  <q-page class="flex flex-center column">
+  <q-page class="flex flex-center column register-page">
     <div class="login-title podcastor-label">
       Register
     </div>
     <q-form @submit="register" class="q-gutter-md">
       <q-input
-        class="login-input"
+        class="input-login"
         filled
         dark
         v-model="form.name"
@@ -29,7 +29,7 @@
       />
 
       <q-input
-        class="login-input"
+        class="input-login"
         filled type="password"
         dark
         v-model="form.password"
@@ -40,7 +40,12 @@
           val => val && /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(val) || 'Min 8 characters, one special character, upper and lower case letter and a number'
         ]"    
       />
-      <q-btn class="podcastor-btn" type="submit" label="Register"/>
+      <q-btn 
+        class="podcastor-btn" 
+        type="submit" 
+        label="Register"
+        :loading="loading1"
+      />
     </q-form>
   </q-page>
 </template>
@@ -76,6 +81,10 @@
 
 <style scoped lang="scss">
   @import 'src/css/quasar.variables.scss';
+
+  .register-page {
+    text-align: center;
+  }
 
   .input-login {
     min-width: 25em;
