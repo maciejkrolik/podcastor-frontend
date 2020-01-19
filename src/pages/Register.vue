@@ -11,17 +11,21 @@
         v-model="form.name"
         label="Name"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please type login']"
+        :rules="[ val => val && val.length > 0 || 'Please type name']"
+        
       />
 
       <q-input
         class="input-login"
-        filled
+        filled type="email"
         dark
         v-model="form.email"
         label="Email"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please type email']"
+        :rules="[ 
+          val => val && val.length > 0 || 'Please type email',
+          val => val && /^.+@.+\..+$/.test(val) || 'This is not an email'
+        ]"
       />
 
       <q-input
@@ -31,7 +35,10 @@
         v-model="form.password"
         label="Password"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please type password']"    
+        :rules="[
+          val => val && val.length > 0 || 'Please type password',
+          val => val && /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(val) || 'Min 8 characters, one special character, upper and lower case letter and a number'
+        ]"    
       />
       <q-btn class="podcastor-btn" type="submit" label="Register"/>
     </q-form>
