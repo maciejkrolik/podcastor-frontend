@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header style="background-color: transparent;">
+    <q-header style="background-color: transparent;" v-bind:class="{'drawer-open': leftDrawerOpen}">
       <q-toolbar>
         <q-btn
           flat
@@ -17,6 +17,7 @@
       v-model="leftDrawerOpen"
       dark
       content-style="backgroundColor: #0f434d;"
+      overlay
     >
       <q-list padding>
         <q-item>
@@ -99,5 +100,9 @@
 
   body {
     background-image: linear-gradient(to bottom, $gradient-top 0%, $gradient-bottom 800px);
+  }
+
+  .drawer-open {
+    left: 300px;
   }
 </style>

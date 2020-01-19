@@ -17,7 +17,7 @@
     methods: {
       test() {
         alert('test');
-      }
+      },
     }
   }
 </script>
@@ -42,6 +42,8 @@
 
   .box-title {
     color: white;
+    font-size: 1em;
+    padding: 2%;
   }
 
   .box-container {
