@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center column">
+  <q-page class="flex flex-center column login-page">
     <div class="login-title podcastor-label">
       Login
     </div>
@@ -64,6 +64,10 @@
 
 <style scoped lang="scss">
   @import 'src/css/quasar.variables.scss';
+  
+  .login-page {
+    text-align: center;
+  }
 
   .input-login {
     min-width: 25em;
