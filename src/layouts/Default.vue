@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header style="background-color: transparent;">
+    <q-header style="background-color: transparent;" v-bind:class="{'drawer-open': leftDrawerOpen}">
       <q-toolbar>
         <q-btn
           flat
@@ -10,6 +10,7 @@
           icon="menu"
           aria-label="Menu"
         />
+        <q-toolbar-title class="podcastor-label">{{title}}</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -17,6 +18,7 @@
       v-model="leftDrawerOpen"
       dark
       content-style="backgroundColor: #0f434d;"
+      overlay
     >
       <q-list padding>
         <q-item>
@@ -69,13 +71,16 @@
   export default {
     data() {
       return {
-        leftDrawerOpen: false
+        leftDrawerOpen: false,
       }
     },
     computed: {
       ...mapGetters({
         user: 'auth/user'
-      })
+      }),
+      title() {
+        return this.$route.meta.title;
+      },
     },
     methods: {
       ...mapActions({
@@ -99,5 +104,9 @@
 
   body {
     background-image: linear-gradient(to bottom, $gradient-top 0%, $gradient-bottom 800px);
+  }
+
+  .drawer-open {
+    left: 300px;
   }
 </style>
