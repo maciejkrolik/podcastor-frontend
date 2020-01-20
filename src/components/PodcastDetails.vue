@@ -6,16 +6,13 @@
       <q-btn icon="close" flat round dense v-close-popup/>
     </q-card-section>
 
-    <q-card-section class="podcast-description">
+    <q-card-section class="podcast-description row justify-center">
       <div v-if="loading">
         <q-spinner class="details-spinner self-center" size="2rem"/>
       </div>
       <div v-if="!loading">
         <p v-html="rss.description"/>
-        <div v-for="episode in rss.items" :key="episode.guid">
-          <q-icon name="play_arrow"/>
-          <p>{{episode.title}}</p>
-        </div>
+        <EpisodeItem v-for="episode in rss.items" :key="episode.guid" v-bind:episode="episode"/>
       </div>
     </q-card-section>
   </q-card>
@@ -23,6 +20,7 @@
 
 <script>
   import RssParser from 'rss-parser';
+  import EpisodeItem from "./EpisodeItem";
 
   let parser = new RssParser();
 
@@ -41,7 +39,6 @@
         parser.parseURL('https://cors-anywhere.herokuapp.com/' + this.podcast.feedUrl + '?format=xml')
           .then(response => {
             this.rss = response;
-            console.log(response);
           })
           .catch(error => {
             console.log(error);
@@ -50,6 +47,9 @@
             this.loading = false;
           });
       }
+    },
+    components: {
+      EpisodeItem
     },
     mounted() {
       this.getEpisodes();
