@@ -60,7 +60,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view/>
+      <router-view @play-episode="playEpisode"></router-view>
     </q-page-container>
 
     <q-footer 
@@ -71,12 +71,14 @@
     >
       <q-media-player
         type="audio"
-        :sources="sources"
+        ref="mediaplayer"
+        :source="itemUrl"
         background-color="transparent"
         dense
         dark
-        :autoplay="true"
-      />
+        :showSpinner="false"
+        autoplay
+      />      
     </q-footer>
   </q-layout>  
 </template>
@@ -87,13 +89,8 @@
   export default {
     data() {
       return {
-        leftDrawerOpen: false,
-        sources : [
-          {
-            src: 'https://aidolofficial.podomatic.com/enclosure/2017-04-26T10_27_10-07_00.mp3',
-            type: 'audio/mp3'
-          }
-        ],
+        leftDrawerOpen: false,      
+        itemUrl : null,  
       }
     },
     computed: {
@@ -102,7 +99,7 @@
       }),
       title() {
         return this.$route.meta.title;
-      },
+      }
     },
     methods: {
       ...mapActions({
@@ -116,7 +113,12 @@
               path: '/'
             })
           })
-      }
+      },
+
+      playEpisode(episode) {
+        this.itemUrl=episode.enclosure.url;
+        document.getElementById('btn-close-details').click();
+      },
     }
   }
 </script>

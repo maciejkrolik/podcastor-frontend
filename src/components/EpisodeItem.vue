@@ -7,6 +7,7 @@
         flat
         dense
         icon="play_arrow"
+        @click="playEpisode(episode)"
       />
       {{episode.title}}
       <q-btn
@@ -36,6 +37,11 @@
       return {
         expanded: false,
       }
+    },
+    methods: {
+      playEpisode(episode) {
+        this.$emit('play-episode', episode);
+      },
     },
   }
 </script>

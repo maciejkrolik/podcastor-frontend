@@ -14,7 +14,9 @@
       <PodcastListItem v-if="!loading"
                        v-for="podcast in podcasts"
                        :key="podcast.collectionId"
-                       v-bind:podcast="podcast"/>
+                       v-bind:podcast="podcast"
+                       @play-episode="playEpisode"
+                       />
     </div>
   </q-page>
 </template>
@@ -51,7 +53,11 @@
           .finally(() => {
             this.loading = false;
           })
-      }
+      },
+
+      playEpisode(episode) {
+        this.$emit('play-episode', episode);
+      },
     },
     beforeMount() {
       this.getPodcasts();

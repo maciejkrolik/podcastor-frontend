@@ -8,7 +8,7 @@
     </div>
     <q-btn class="list-item-btn self-center" color="green" flat rounded icon="add"/>
     <q-dialog v-model="podcastDetailsDialog">
-      <PodcastDetails v-bind:podcast="podcast"/>
+      <PodcastDetails v-bind:podcast="podcast" @play-episode="playEpisode"/>
     </q-dialog>
   </div>
 </template>
@@ -23,6 +23,11 @@
       return {
         podcastDetailsDialog: false,
       }
+    },
+    methods: {
+      playEpisode(episode) {
+        this.$emit('play-episode', episode);
+      },
     },
     components: {
       PodcastDetails
