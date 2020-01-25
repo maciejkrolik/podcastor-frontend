@@ -6,7 +6,12 @@
         {{podcast.collectionName}}
       </div>
     </div>
-    <q-btn class="list-item-btn self-center" color="green" flat rounded icon="add"/>
+    <q-btn @click="changeFavoriteState()"
+           class="list-item-btn self-center"
+           flat
+           rounded
+           :color="iconColor"
+           :icon="icon"/>
     <q-dialog v-model="podcastDetailsDialog">
       <PodcastDetails v-bind:podcast="podcast"/>
     </q-dialog>
@@ -14,15 +19,71 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import PodcastDetails from "./PodcastDetails";
+  import {Notify} from "quasar";
+
+  const URL = "https://podcastor-backend.herokuapp.com/users";
 
   export default {
-    props: ['podcast'],
+    props: ['podcast', 'isFavorite'],
     name: 'PodcastListItem',
     data: function () {
       return {
         podcastDetailsDialog: false,
+        isFavoriteMutable: this.isFavorite,
+        icon: '',
+        iconColor: ''
       }
+    },
+    methods: {
+      changeFavoriteState() {
+        if (this.isFavoriteMutable) {
+          this.removeFromFavorite();
+          this.$emit('remove-podcast', this.podcast['_id']);
+        } else {
+          this.addToFavorite();
+        }
+        this.isFavoriteMutable = !this.isFavoriteMutable;
+        this.setIcon()
+      },
+      addToFavorite() {
+        axios.post(URL + '/addpodcast', {
+          collectionId: this.podcast.collectionId,
+          trackId: this.podcast.trackId,
+          trackName: this.podcast.trackName,
+          collectionName: this.podcast.collectionName,
+          feedUrl: this.podcast.feedUrl,
+          artworkUrl600: this.podcast.artworkUrl600
+        })
+          .then(() => {
+            Notify.create(this.podcast.collectionName + ' added to favorites ❤');
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      },
+      removeFromFavorite() {
+        axios.delete(URL + '/podcasts/' + this.podcast['_id'])
+          .then(() => {
+            Notify.create(this.podcast.collectionName + ' removed from favorites');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+      setIcon() {
+        if (this.isFavoriteMutable) {
+          this.icon = 'remove';
+          this.iconColor = 'red';
+        } else {
+          this.icon = 'add';
+          this.iconColor = 'green';
+        }
+      }
+    },
+    beforeMount() {
+      this.setIcon();
     },
     components: {
       PodcastDetails
@@ -62,5 +123,9 @@
     margin: 0.5em;
     height: 2.5em;
     width: 2.5em;
+  }
+
+  .favorite {
+    icon: 'remove'
   }
 </style>

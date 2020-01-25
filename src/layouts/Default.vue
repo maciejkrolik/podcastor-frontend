@@ -21,7 +21,7 @@
       overlay
     >
       <q-list padding>
-        <q-item>
+        <q-item v-if="user">
           Logged as {{user.name}}
         </q-item>
         <q-item to="/podcasts" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
