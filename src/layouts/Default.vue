@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr fFf">
     <q-header style="background-color: transparent;" v-bind:class="{'drawer-open': leftDrawerOpen}">
       <q-toolbar>
         <q-btn
@@ -62,7 +62,18 @@
     <q-page-container>
       <router-view/>
     </q-page-container>
-  </q-layout>
+
+    <q-footer 
+      bordered 
+      elevated 
+      class="text-white" 
+      style="backgroundColor: #1a082e; height: 60px"
+    >
+      <q-toolbar>
+      
+      </q-toolbar>
+    </q-footer>
+  </q-layout>  
 </template>
 
 <script>
