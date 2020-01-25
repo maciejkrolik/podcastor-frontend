@@ -69,9 +69,14 @@
       class="text-white" 
       style="backgroundColor: #1a082e; height: 60px"
     >
-      <q-toolbar>
-      
-      </q-toolbar>
+      <q-media-player
+        type="audio"
+        :sources="sources"
+        background-color="transparent"
+        dense
+        dark
+        :autoplay="true"
+      />
     </q-footer>
   </q-layout>  
 </template>
@@ -83,6 +88,12 @@
     data() {
       return {
         leftDrawerOpen: false,
+        sources : [
+          {
+            src: 'https://aidolofficial.podomatic.com/enclosure/2017-04-26T10_27_10-07_00.mp3',
+            type: 'audio/mp3'
+          }
+        ],
       }
     },
     computed: {
@@ -124,4 +135,14 @@
   .drawer-open {
     left: 300px;
   }
+
+  .q-media, .q-media__controls, .q-media__controls--row  {
+    height: 100% !important;
+  }
+
+  .q-media__controls--row {
+    align-content: center;
+    margin: 0 3vw;
+  }
+
 </style>
