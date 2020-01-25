@@ -11,10 +11,10 @@
         v-model="form.email"
         label="Email"
         lazy-rules
-        :rules="[ 
+        :rules="[
           val => val && val.length > 0 || 'Please type email',
           val => val && /^.+@.+\..+$/.test(val) || 'This is not an email'
-        ]"     
+        ]"
       />
       <q-input
         class="login-input"
@@ -33,6 +33,7 @@
 
 <script>
   import {mapActions} from 'vuex';
+  import {Notify} from "quasar";
 
   export default {
     data: function () {
@@ -48,9 +49,9 @@
       ...mapActions({
         signIn: 'auth/signIn'
       }),
-      submit() {  
+      submit() {
         this.form.loading = true;
-        
+
         this.signIn(this.form)
           .then(() => {
             this.$router.replace({
@@ -58,7 +59,9 @@
             })
           })
           .catch((err) => {
+            this.form.loading = false;
             console.log(err);
+            Notify.create('Wrong credentials');
           })
       }
     }
@@ -67,7 +70,7 @@
 
 <style scoped lang="scss">
   @import 'src/css/quasar.variables.scss';
-  
+
   .login-page {
     text-align: center;
   }
