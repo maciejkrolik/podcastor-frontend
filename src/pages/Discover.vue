@@ -15,7 +15,9 @@
                        v-for="podcast in podcasts"
                        :key="podcast.collectionId"
                        v-bind:podcast="podcast"
-                       v-bind:isFavorite="podcast.isFavorite"/>
+                       v-bind:isFavorite="podcast.isFavorite"
+                       @play-episode="playEpisode"
+                       />
     </div>
   </q-page>
 </template>
@@ -57,7 +59,7 @@
           })
           .finally(() => {
             this.loading = false;
-          });
+          })
       },
       getItunesPodcasts() {
         let endpointUrl;
@@ -68,6 +70,9 @@
       },
       getFavoritePodcasts() {
         return axios.get(DB_URL);
+      },
+      playEpisode(episode) {
+        this.$emit('play-episode', episode);
       }
     },
     beforeMount() {

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr fFf">
     <q-header style="background-color: transparent;" v-bind:class="{'drawer-open': leftDrawerOpen}">
       <q-toolbar>
         <q-btn
@@ -60,9 +60,27 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view/>
+      <router-view @play-episode="playEpisode"></router-view>
     </q-page-container>
-  </q-layout>
+
+    <q-footer 
+      bordered 
+      elevated 
+      class="text-white" 
+      style="backgroundColor: #1a082e; height: 60px"
+    >
+      <q-media-player
+        type="audio"
+        ref="mediaplayer"
+        :source="itemUrl"
+        background-color="transparent"
+        dense
+        dark
+        :showSpinner="false"
+        autoplay
+      />      
+    </q-footer>
+  </q-layout>  
 </template>
 
 <script>
@@ -71,7 +89,8 @@
   export default {
     data() {
       return {
-        leftDrawerOpen: false,
+        leftDrawerOpen: false,      
+        itemUrl : null,  
       }
     },
     computed: {
@@ -80,7 +99,7 @@
       }),
       title() {
         return this.$route.meta.title;
-      },
+      }
     },
     methods: {
       ...mapActions({
@@ -94,7 +113,12 @@
               path: '/'
             })
           })
-      }
+      },
+
+      playEpisode(episode) {
+        this.itemUrl=episode.enclosure.url;
+        document.getElementById('btn-close-details').click();
+      },
     }
   }
 </script>
@@ -113,4 +137,14 @@
   .drawer-open {
     left: 300px;
   }
+
+  .q-media, .q-media__controls, .q-media__controls--row  {
+    height: 100% !important;
+  }
+
+  .q-media__controls--row {
+    align-content: center;
+    margin: 0 3vw;
+  }
+
 </style>

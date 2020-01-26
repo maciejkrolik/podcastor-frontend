@@ -3,7 +3,7 @@
     <q-card-section class="row items-center q-pb-none">
       <div class="text-h6">{{podcast.trackName}}</div>
       <q-space/>
-      <q-btn icon="close" flat round dense v-close-popup/>
+      <q-btn id="btn-close-details" icon="close" flat round dense v-close-popup/>
     </q-card-section>
 
     <q-card-section class="podcast-description row justify-center">
@@ -12,7 +12,7 @@
       </div>
       <div v-if="!loading">
         <p v-html="rss.description"/>
-        <EpisodeItem v-for="episode in rss.items" :key="episode.guid" v-bind:episode="episode"/>
+        <EpisodeItem v-for="episode in rss.items" :key="episode.guid" v-bind:episode="episode" @play-episode="playEpisode"/>
       </div>
     </q-card-section>
   </q-card>
@@ -46,7 +46,11 @@
           .finally(() => {
             this.loading = false;
           });
-      }
+      },
+
+      playEpisode(episode) {
+        this.$emit('play-episode', episode);
+      },
     },
     components: {
       EpisodeItem

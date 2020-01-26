@@ -13,7 +13,7 @@
            :color="iconColor"
            :icon="icon"/>
     <q-dialog v-model="podcastDetailsDialog">
-      <PodcastDetails v-bind:podcast="podcast"/>
+      <PodcastDetails v-bind:podcast="podcast" @play-episode="playEpisode"/>
     </q-dialog>
   </div>
 </template>
@@ -80,6 +80,9 @@
           this.icon = 'add';
           this.iconColor = 'green';
         }
+      },
+      playEpisode(episode) {
+        this.$emit('play-episode', episode);
       }
     },
     beforeMount() {
