@@ -98,8 +98,9 @@
   @import 'src/css/quasar.variables.scss';
 
   .list-item-img {
-    width: 7em;
-    padding: 0.5em;
+    width: 6em;
+    min-width: 6em;
+    margin: 0.5em;
   }
 
   .box {
@@ -112,6 +113,8 @@
   }
 
   .box-title {
+    max-height: 8em;
+    overflow: hidden;
     color: white;
     font-size: 1em;
     padding: 2%;

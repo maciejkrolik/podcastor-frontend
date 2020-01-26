@@ -3,7 +3,6 @@
     <q-card v-if="!isLoading" dark class="profile-card">
       <q-card-section>
         <q-input
-          class="profile-input"
           v-model="profile.name"
           filled
           dark
@@ -13,7 +12,6 @@
         />
 
         <q-input
-          class="profile-input"
           v-model="profile.email"
           filled type="email"
           dark
@@ -27,7 +25,6 @@
         />
 
         <q-input
-          class="profile-input"
           v-model="changedPassword"
           filled type="password"
           dark
@@ -41,14 +38,13 @@
 
         <div class="flex flex-center column">
           <q-btn @click="saveProfile" class="podcastor-btn profile-btn" type="submit" label="Change profile data"/>
-          <q-btn @click="logoutAll" class="podcastor-btn profile-btn" style="margin-bottom: 5%;" type="submit"
+          <q-btn @click="logoutAll" class="podcastor-btn profile-btn" type="submit"
                  label="Logout from all devices"/>
           <q-spinner v-if="isDataLoading" class="spinner" color="purple-7" size="3em"/>
         </div>
       </q-card-section>
-
-      <q-spinner v-if="isLoading" class="spinner" color="purple-7" size="3em"/>
     </q-card>
+    <q-spinner v-if="isLoading" class="spinner" color="purple-7" size="3em"/>
   </q-page>
 </template>
 
@@ -62,7 +58,7 @@
   export default {
     data: function () {
       return {
-        isLoading: false,
+        isLoading: true,
         isDataLoading: false,
         profile: '',
         changedPassword: ''
@@ -79,7 +75,6 @@
         axios.get(URL)
           .then((response) => {
             this.profile = response.data;
-            this.isLoading = false;
           })
           .catch((error) => {
             console.log(error);
@@ -133,16 +128,11 @@
   @import 'src/css/quasar.variables.scss';
 
   .profile-card {
-    min-width: 80%;
     background-color: $gradient-bottom;
   }
 
-  .profile-input {
-    margin: 5%;
-  }
-
   .profile-btn {
-    margin: 1%;
+    margin: 1em;
     min-width: 15em;
   }
 </style>

@@ -7,6 +7,7 @@
                        :key="podcast.collectionId"
                        v-bind:podcast="podcast"
                        v-bind:isFavorite="true"
+                       @play-episode="playEpisode"
                        @remove-podcast="removePodcast"/>
     </div>
 
@@ -50,6 +51,9 @@
       },
       removePodcast(id) {
         this.favoritePodcasts = this.favoritePodcasts.filter(podcast => podcast['_id'] !== id);
+      },
+      playEpisode(episode) {
+        this.$emit('play-episode', episode);
       }
     },
     beforeMount() {

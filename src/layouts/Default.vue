@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr fFf">
-    <q-header style="background-color: transparent;" v-bind:class="{'drawer-open': leftDrawerOpen}">
+    <q-header>
       <q-toolbar>
         <q-btn
           flat
@@ -17,14 +17,15 @@
     <q-drawer
       v-model="leftDrawerOpen"
       dark
-      content-style="backgroundColor: #0f434d;"
-      overlay
+      elevated
+      content-style="backgroundColor: #1a082e;"
+      behavior="mobile"
     >
       <q-list padding>
         <q-item v-if="user">
           Logged as {{user.name}}
         </q-item>
-        <q-item to="/podcasts" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
+        <q-item to="/podcasts" exact clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="music_note"/>
           </q-item-section>
@@ -32,7 +33,7 @@
             <q-item-label>Podcasts</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/discover" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
+        <q-item to="/discover" exact clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="language"/>
           </q-item-section>
@@ -40,7 +41,7 @@
             <q-item-label>Discover</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/profile" @click="leftDrawerOpen = !leftDrawerOpen" exact clickable v-ripple>
+        <q-item to="/profile" exact clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="people"/>
           </q-item-section>
@@ -60,13 +61,13 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view @play-episode="playEpisode"></router-view>
+      <router-view @play-episode="playEpisode"/>
     </q-page-container>
 
-    <q-footer 
-      bordered 
-      elevated 
-      class="text-white" 
+    <q-footer
+      bordered
+      elevated
+      class="text-white"
       style="backgroundColor: #1a082e; height: 60px"
     >
       <q-media-player
@@ -78,9 +79,9 @@
         dark
         :showSpinner="false"
         autoplay
-      />      
+      />
     </q-footer>
-  </q-layout>  
+  </q-layout>
 </template>
 
 <script>
@@ -89,8 +90,8 @@
   export default {
     data() {
       return {
-        leftDrawerOpen: false,      
-        itemUrl : null,  
+        leftDrawerOpen: false,
+        itemUrl: null,
       }
     },
     computed: {
@@ -116,7 +117,7 @@
       },
 
       playEpisode(episode) {
-        this.itemUrl=episode.enclosure.url;
+        this.itemUrl = episode.enclosure.url;
         document.getElementById('btn-close-details').click();
       },
     }
@@ -134,11 +135,7 @@
     background-image: linear-gradient(to bottom, $gradient-top 0%, $gradient-bottom 800px);
   }
 
-  .drawer-open {
-    left: 300px;
-  }
-
-  .q-media, .q-media__controls, .q-media__controls--row  {
+  .q-media, .q-media__controls, .q-media__controls--row {
     height: 100% !important;
   }
 
