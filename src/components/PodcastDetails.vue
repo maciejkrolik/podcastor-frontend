@@ -12,7 +12,8 @@
       </div>
       <div v-if="!loading">
         <p v-html="rss.description"/>
-        <EpisodeItem v-for="episode in rss.items" :key="episode.guid" v-bind:episode="episode" @play-episode="playEpisode"/>
+        <EpisodeItem v-for="episode in rss.items" :key="episode.guid" v-bind:episode="episode"
+                     @play-episode="playEpisode"/>
       </div>
     </q-card-section>
   </q-card>
@@ -21,6 +22,7 @@
 <script>
   import RssParser from 'rss-parser';
   import EpisodeItem from "./EpisodeItem";
+  import {Platform} from 'quasar'
 
   let parser = new RssParser();
 
@@ -36,7 +38,15 @@
     methods: {
       getEpisodes() {
         this.loading = true;
-        parser.parseURL('https://cors-anywhere.herokuapp.com/' + this.podcast.feedUrl + '?format=xml')
+
+        let requestUrl = '';
+        if (Platform.is.electron) {
+          requestUrl = this.podcast.feedUrl + '?format=xml'
+        } else {
+          requestUrl = 'https://cors-anywhere.herokuapp.com/' + this.podcast.feedUrl + '?format=xml'
+        }
+
+        parser.parseURL(requestUrl)
           .then(response => {
             this.rss = response;
           })

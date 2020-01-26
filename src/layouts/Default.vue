@@ -65,16 +65,20 @@
     </q-page-container>
 
     <q-footer
+      v-if="episode"
       bordered
       elevated
       class="text-white"
-      style="backgroundColor: #1a082e; height: 60px"
+      style="backgroundColor: black"
     >
+      <div class="text-center" style="background-color: black">
+        {{episode.title}}
+      </div>
       <q-media-player
         type="audio"
         ref="mediaplayer"
-        :source="itemUrl"
-        background-color="transparent"
+        :source="episode.enclosure.url"
+        background-color="black"
         dense
         dark
         :showSpinner="false"
@@ -91,7 +95,7 @@
     data() {
       return {
         leftDrawerOpen: false,
-        itemUrl: null,
+        episode: null,
       }
     },
     computed: {
@@ -117,7 +121,8 @@
       },
 
       playEpisode(episode) {
-        this.itemUrl = episode.enclosure.url;
+        this.episode = episode;
+        console.log(episode);
         document.getElementById('btn-close-details').click();
       },
     }
@@ -133,10 +138,6 @@
 
   .q-layout {
     background-image: linear-gradient(to bottom, $gradient-top 0%, $gradient-bottom 800px);
-  }
-
-  .q-media, .q-media__controls, .q-media__controls--row {
-    height: 100% !important;
   }
 
   .q-media__controls--row {
